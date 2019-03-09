@@ -1,30 +1,30 @@
 self.__precacheManifest = [
   {
-    "revision": "d17d9f01122d8b7be24f",
-    "url": "/face-recognition/static/css/main.b8c64653.chunk.css"
+    "revision": "0f1de0154040d3380337",
+    "url": "/face-recognition/static/css/main.e25580a2.chunk.css"
   },
   {
-    "revision": "d17d9f01122d8b7be24f",
-    "url": "/face-recognition/static/js/main.4181462c.chunk.js"
+    "revision": "0f1de0154040d3380337",
+    "url": "/face-recognition/static/js/main.d0833cec.chunk.js"
   },
   {
     "revision": "4f80a46f991ce10a0145",
     "url": "/face-recognition/static/js/runtime~main.7c17b3be.js"
   },
   {
-    "revision": "d5c58d9b90adb1c19757",
+    "revision": "45120b087b9b23c0d8a8",
     "url": "/face-recognition/static/css/2.c317e5b1.chunk.css"
   },
   {
-    "revision": "d5c58d9b90adb1c19757",
-    "url": "/face-recognition/static/js/2.f962c718.chunk.js"
+    "revision": "45120b087b9b23c0d8a8",
+    "url": "/face-recognition/static/js/2.635bb4d0.chunk.js"
   },
   {
     "revision": "5e892e88fef998beb61f49a442ccb535",
     "url": "/face-recognition/static/media/ava.5e892e88.jpg"
   },
   {
-    "revision": "c3071cfc5230d07806463fef60ce7cec",
+    "revision": "43489d5654adf035dc5357b87894cd9b",
     "url": "/face-recognition/index.html"
   }
 ];
