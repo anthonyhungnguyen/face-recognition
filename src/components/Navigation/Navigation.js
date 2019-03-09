@@ -1,11 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Navigation extends Component {
-	render() {
-		return (
-			<nav className='flex justify-end'>
-				<p className='f3 link dim black underline pa3 pointer'>Sign out</p>
-			</nav>
-		);
-	}
-}
+const Navigation = ({ onRouteChange, isSignedIn }) => {
+	return isSignedIn ? (
+		<nav className='flex justify-end'>
+			<p className='f3 link dim black underline pa3 pointer' onClick={() => onRouteChange('signout')}>
+				Sign out
+			</p>
+		</nav>
+	) : (
+		<nav className='flex justify-end'>
+			<p className='f3 link dim black underline pa3 pointer' onClick={() => onRouteChange('signin')}>
+				Sign In
+			</p>
+			<p className='f3 link dim black underline pa3 pointer' onClick={() => onRouteChange('register')}>
+				Register
+			</p>
+		</nav>
+	);
+};
+
+export default Navigation;
