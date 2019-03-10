@@ -21,7 +21,7 @@ class App extends Component {
 		this.state = {
 			input      : '',
 			imageUrl   : '',
-			box        : {},
+			box        : [],
 			route      : 'signin',
 			concepts   : [],
 			hasInput   : false,
@@ -30,26 +30,41 @@ class App extends Component {
 	}
 
 	calculateFaceLocation = response => {
-		const clarifaiFace = response.outputs[0].data.regions[0].region_info.bounding_box;
+		const clarifaiFace = response.outputs[0].data.regions;
 		const image = document.getElementById('inputimage');
 		const width = Number(image.width);
 		const height = Number(image.height);
 		const rootWidth = document.getElementById('root').offsetWidth;
-		return {
-			leftCol   : (rootWidth - width) / 2 + clarifaiFace.left_col * width,
-			topRow    : clarifaiFace.top_row * height,
-			rightCol  : (rootWidth - width) / 2 + width - clarifaiFace.right_col * width,
-			bottomRow : height - clarifaiFace.bottom_row * height
-		};
+		const box = [];
+		for (const face of clarifaiFace) {
+			const face_prop = face.region_info.bounding_box;
+			const boxEl = {
+				leftCol   : (rootWidth - width) / 2 + face_prop.left_col * width,
+				topRow    : face_prop.top_row * height,
+				rightCol  : (rootWidth - width) / 2 + width - face_prop.right_col * width,
+				bottomRow : height - face_prop.bottom_row * height
+			};
+			box.push(boxEl);
+		}
+		return box;
 	};
 
-	setPredictedConcept = response => {
+	extractPredictedConcept = response => {
+		const clarifaiFace = response.outputs[0].data.regions;
+		const faces = [];
+		for (const face of clarifaiFace) {
+			faces.push(face.data.face.identity.concepts);
+		}
+		return faces;
+	};
+
+	setPredictedConcept = faces => {
 		this.setState({ hasInput: true });
-		this.setState({ concepts: response.outputs[0].data.regions[0].data.face.identity.concepts });
-		console.log(this.state.concept);
+		this.setState({ concepts: faces });
+		debugger;
 	};
 
-	displayFaceBox = box => {
+	setBox = box => {
 		this.setState({ box: box });
 	};
 
@@ -60,8 +75,8 @@ class App extends Component {
 		app.models
 			.predict('e466caa0619f444ab97497640cefc4dc', this.state.input)
 			.then(response => {
-				this.setPredictedConcept(response);
-				this.displayFaceBox(this.calculateFaceLocation(response));
+				this.setPredictedConcept(this.extractPredictedConcept(response));
+				this.setBox(this.calculateFaceLocation(response));
 			})
 			.catch(err => console.log(err));
 	};
