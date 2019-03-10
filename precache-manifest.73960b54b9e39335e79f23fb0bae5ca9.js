@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "26ed547b89c18295e45a",
+    "revision": "1eba381354382fa07afe",
     "url": "/face-recognition/static/css/main.b4b0a638.chunk.css"
   },
   {
-    "revision": "26ed547b89c18295e45a",
-    "url": "/face-recognition/static/js/main.beeb4400.chunk.js"
+    "revision": "1eba381354382fa07afe",
+    "url": "/face-recognition/static/js/main.2a97dab8.chunk.js"
   },
   {
     "revision": "4f80a46f991ce10a0145",
@@ -24,7 +24,7 @@ self.__precacheManifest = [
     "url": "/face-recognition/static/media/ava.5e892e88.jpg"
   },
   {
-    "revision": "6b6d6b308397b9fab9a6ef182ea94792",
+    "revision": "89a256304d09bab4c9136b4601e2848d",
     "url": "/face-recognition/index.html"
   }
 ];
