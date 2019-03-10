@@ -23,6 +23,8 @@ class App extends Component {
 			imageUrl   : '',
 			box        : {},
 			route      : 'signin',
+			concepts   : [],
+			hasInput   : false,
 			isSignedIn : false
 		};
 	}
@@ -41,6 +43,12 @@ class App extends Component {
 		};
 	};
 
+	setPredictedConcept = response => {
+		this.setState({ hasInput: true });
+		this.setState({ concepts: response.outputs[0].data.regions[0].data.face.identity.concepts });
+		console.log(this.state.concept);
+	};
+
 	displayFaceBox = box => {
 		this.setState({ box: box });
 	};
@@ -50,8 +58,11 @@ class App extends Component {
 	onSubmit = () => {
 		this.setState({ imageUrl: this.state.input });
 		app.models
-			.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-			.then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+			.predict('e466caa0619f444ab97497640cefc4dc', this.state.input)
+			.then(response => {
+				this.setPredictedConcept(response);
+				this.displayFaceBox(this.calculateFaceLocation(response));
+			})
 			.catch(err => console.log(err));
 	};
 
@@ -65,7 +76,7 @@ class App extends Component {
 	};
 
 	render() {
-		const { input, box, imageUrl, route, isSignedIn } = this.state;
+		const { input, box, imageUrl, route, isSignedIn, concepts, hasInput } = this.state;
 		return (
 			<div className='App tc courier ma0 pa0'>
 				<Particles params={particlesOptions} className='particles fixed top-0 bottom-0 left-0 right-0' />
@@ -75,7 +86,7 @@ class App extends Component {
 						<Logo />
 						<Rank />
 						<ImageLinkForm onInputChange={this.onInputChange} onSubmit={this.onSubmit} />
-						<FaceRecognition box={box} imageUrl={imageUrl} />
+						<FaceRecognition box={box} imageUrl={imageUrl} concepts={concepts} hasInput={hasInput} />
 					</div>
 				) : this.state.route === 'signin' ? (
 					<SignIn onRouteChange={this.onRouteChange} />
