@@ -32,10 +32,11 @@ class App extends Component {
 		const image = document.getElementById('inputimage');
 		const width = Number(image.width);
 		const height = Number(image.height);
+		const rootWidth = document.getElementById('root').offsetWidth;
 		return {
-			leftCol   : width + clarifaiFace.left_col * width,
+			leftCol   : (rootWidth - width) / 2 + clarifaiFace.left_col * width,
 			topRow    : clarifaiFace.top_row * height,
-			rightCol  : 2 * width - clarifaiFace.right_col * width,
+			rightCol  : (rootWidth - width) / 2 + width - clarifaiFace.right_col * width,
 			bottomRow : height - clarifaiFace.bottom_row * height
 		};
 	};

@@ -1,5 +1,6 @@
 .form {
-	width: 700px;
+	max-width: 700px;
+	min-width: 300px;
 
 	background: radial-gradient(black 3px, transparent 4px), radial-gradient(black 3px, transparent 4px),
 		linear-gradient(#fff 4px, transparent 0),
